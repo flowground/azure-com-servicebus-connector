@@ -1,0 +1,49 @@
+{
+    "type": "object",
+    "properties": {
+        "resourceGroupName": {
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
+        },
+        "namespaceName": {
+            "required": true,
+            "type": "string",
+            "minLength": 6,
+            "maxLength": 50
+        },
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "Namespace Migrate Object",
+            "properties": {
+                "targetNamespaceType": {
+                    "description": "Type of namespaces",
+                    "enum": [
+                        "Messaging",
+                        "NotificationHub",
+                        "Mixed",
+                        "EventHub",
+                        "Relay"
+                    ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "modelAsString": false,
+                        "name": "NameSpaceType"
+                    }
+                }
+            },
+            "required": [
+                "targetNamespaceType"
+            ],
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

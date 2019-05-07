@@ -1,0 +1,109 @@
+{
+    "type": "object",
+    "properties": {
+        "resourceGroupName": {
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
+        },
+        "namespaceName": {
+            "required": true,
+            "type": "string",
+            "minLength": 6,
+            "maxLength": 50
+        },
+        "alias": {
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50
+        },
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "allOf": [
+                {
+                    "description": "The Resource definition for other than namespace.",
+                    "properties": {
+                        "id": {
+                            "description": "Resource Id",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "name": {
+                            "description": "Resource name",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "type": {
+                            "description": "Resource type",
+                            "readOnly": true,
+                            "type": "string"
+                        }
+                    },
+                    "x-ms-azure-resource": true,
+                    "type": "object"
+                }
+            ],
+            "description": "Single item in List or Get Alias(Disaster Recovery configuration) operation",
+            "properties": {
+                "properties": {
+                    "description": "Properties required to the Create Or Update Alias(Disaster Recovery configurations)",
+                    "properties": {
+                        "alternateName": {
+                            "description": "Primary/Secondary eventhub namespace name, which is part of GEO DR pairing",
+                            "type": "string"
+                        },
+                        "partnerNamespace": {
+                            "description": "ARM Id of the Primary/Secondary eventhub namespace name, which is part of GEO DR pairing",
+                            "type": "string"
+                        },
+                        "pendingReplicationOperationsCount": {
+                            "description": "Number of entities pending to be replicated.",
+                            "format": "int64",
+                            "readOnly": true,
+                            "type": "integer"
+                        },
+                        "provisioningState": {
+                            "description": "Provisioning state of the Alias(Disaster Recovery configuration) - possible values 'Accepted' or 'Succeeded' or 'Failed'",
+                            "enum": [
+                                "Accepted",
+                                "Succeeded",
+                                "Failed"
+                            ],
+                            "readOnly": true,
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": false,
+                                "name": "ProvisioningStateDR"
+                            }
+                        },
+                        "role": {
+                            "description": "role of namespace in GEO DR - possible values 'Primary' or 'PrimaryNotReplicating' or 'Secondary'",
+                            "enum": [
+                                "Primary",
+                                "PrimaryNotReplicating",
+                                "Secondary"
+                            ],
+                            "readOnly": true,
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": false,
+                                "name": "RoleDisasterRecovery"
+                            }
+                        }
+                    },
+                    "x-ms-client-flatten": true
+                }
+            },
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

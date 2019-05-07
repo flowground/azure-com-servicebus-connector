@@ -1,0 +1,42 @@
+{
+    "type": "object",
+    "properties": {
+        "resourceGroupName": {
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
+        },
+        "namespaceName": {
+            "required": true,
+            "type": "string",
+            "minLength": 6,
+            "maxLength": 50
+        },
+        "topicName": {
+            "required": true,
+            "type": "string",
+            "minLength": 1
+        },
+        "subscriptionName": {
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50
+        },
+        "ruleName": {
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50
+        },
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

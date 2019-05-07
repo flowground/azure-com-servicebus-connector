@@ -1,0 +1,192 @@
+{
+    "type": "object",
+    "properties": {
+        "resourceGroupName": {
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
+        },
+        "namespaceName": {
+            "required": true,
+            "type": "string",
+            "minLength": 6,
+            "maxLength": 50
+        },
+        "topicName": {
+            "required": true,
+            "type": "string",
+            "minLength": 1
+        },
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "allOf": [
+                {
+                    "description": "The Resource definition for other than namespace.",
+                    "properties": {
+                        "id": {
+                            "description": "Resource Id",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "name": {
+                            "description": "Resource name",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "type": {
+                            "description": "Resource type",
+                            "readOnly": true,
+                            "type": "string"
+                        }
+                    },
+                    "x-ms-azure-resource": true,
+                    "type": "object"
+                }
+            ],
+            "description": "Description of topic resource.",
+            "properties": {
+                "properties": {
+                    "description": "Properties of topic resource.",
+                    "x-ms-client-flatten": true,
+                    "properties": {
+                        "accessedAt": {
+                            "description": "Last time the message was sent, or a request was received, for this topic.",
+                            "format": "date-time",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "autoDeleteOnIdle": {
+                            "description": "ISO 8601 timespan idle interval after which the topic is automatically deleted. The minimum duration is 5 minutes.",
+                            "format": "duration",
+                            "type": "string"
+                        },
+                        "countDetails": {
+                            "description": "Message count details",
+                            "readOnly": true,
+                            "properties": {
+                                "activeMessageCount": {
+                                    "description": "Number of active messages in the queue, topic, or subscription.",
+                                    "format": "int64",
+                                    "readOnly": true,
+                                    "type": "integer"
+                                },
+                                "deadLetterMessageCount": {
+                                    "description": "Number of messages that are dead lettered.",
+                                    "format": "int64",
+                                    "readOnly": true,
+                                    "type": "integer"
+                                },
+                                "scheduledMessageCount": {
+                                    "description": "Number of scheduled messages.",
+                                    "format": "int64",
+                                    "readOnly": true,
+                                    "type": "integer"
+                                },
+                                "transferDeadLetterMessageCount": {
+                                    "description": "Number of messages transferred into dead letters.",
+                                    "format": "int64",
+                                    "readOnly": true,
+                                    "type": "integer"
+                                },
+                                "transferMessageCount": {
+                                    "description": "Number of messages transferred to another queue, topic, or subscription.",
+                                    "format": "int64",
+                                    "readOnly": true,
+                                    "type": "integer"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "createdAt": {
+                            "description": "Exact time the message was created.",
+                            "format": "date-time",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "defaultMessageTimeToLive": {
+                            "description": "ISO 8601 Default message timespan to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself.",
+                            "format": "duration",
+                            "type": "string"
+                        },
+                        "duplicateDetectionHistoryTimeWindow": {
+                            "description": "ISO8601 timespan structure that defines the duration of the duplicate detection history. The default value is 10 minutes.",
+                            "format": "duration",
+                            "type": "string"
+                        },
+                        "enableBatchedOperations": {
+                            "description": "Value that indicates whether server-side batched operations are enabled.",
+                            "type": "boolean"
+                        },
+                        "enableExpress": {
+                            "description": "Value that indicates whether Express Entities are enabled. An express topic holds a message in memory temporarily before writing it to persistent storage.",
+                            "type": "boolean"
+                        },
+                        "enablePartitioning": {
+                            "description": "Value that indicates whether the topic to be partitioned across multiple message brokers is enabled.",
+                            "type": "boolean"
+                        },
+                        "maxSizeInMegabytes": {
+                            "description": "Maximum size of the topic in megabytes, which is the size of the memory allocated for the topic. Default is 1024.",
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "requiresDuplicateDetection": {
+                            "description": "Value indicating if this topic requires duplicate detection.",
+                            "type": "boolean"
+                        },
+                        "sizeInBytes": {
+                            "description": "Size of the topic, in bytes.",
+                            "format": "int64",
+                            "readOnly": true,
+                            "type": "integer"
+                        },
+                        "status": {
+                            "description": "Enumerates the possible values for the status of a messaging entity.",
+                            "enum": [
+                                "Active",
+                                "Disabled",
+                                "Restoring",
+                                "SendDisabled",
+                                "ReceiveDisabled",
+                                "Creating",
+                                "Deleting",
+                                "Renaming",
+                                "Unknown"
+                            ],
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": false,
+                                "name": "EntityStatus"
+                            }
+                        },
+                        "subscriptionCount": {
+                            "description": "Number of subscriptions.",
+                            "format": "int32",
+                            "readOnly": true,
+                            "type": "integer"
+                        },
+                        "supportOrdering": {
+                            "description": "Value that indicates whether the topic supports ordering.",
+                            "type": "boolean"
+                        },
+                        "updatedAt": {
+                            "description": "The exact time the message was updated.",
+                            "format": "date-time",
+                            "readOnly": true,
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

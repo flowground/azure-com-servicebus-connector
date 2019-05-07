@@ -1,0 +1,201 @@
+{
+    "type": "object",
+    "properties": {
+        "resourceGroupName": {
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
+        },
+        "namespaceName": {
+            "required": true,
+            "type": "string",
+            "minLength": 6,
+            "maxLength": 50
+        },
+        "topicName": {
+            "required": true,
+            "type": "string",
+            "minLength": 1
+        },
+        "subscriptionName": {
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50
+        },
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "allOf": [
+                {
+                    "description": "The Resource definition for other than namespace.",
+                    "properties": {
+                        "id": {
+                            "description": "Resource Id",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "name": {
+                            "description": "Resource name",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "type": {
+                            "description": "Resource type",
+                            "readOnly": true,
+                            "type": "string"
+                        }
+                    },
+                    "x-ms-azure-resource": true,
+                    "type": "object"
+                }
+            ],
+            "description": "Description of subscription resource.",
+            "properties": {
+                "properties": {
+                    "description": "Properties of subscriptions resource.",
+                    "x-ms-client-flatten": true,
+                    "properties": {
+                        "accessedAt": {
+                            "description": "Last time there was a receive request to this subscription.",
+                            "format": "date-time",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "autoDeleteOnIdle": {
+                            "description": "ISO 8061 timeSpan idle interval after which the topic is automatically deleted. The minimum duration is 5 minutes.",
+                            "format": "duration",
+                            "type": "string"
+                        },
+                        "countDetails": {
+                            "description": "Message count details",
+                            "readOnly": true,
+                            "properties": {
+                                "activeMessageCount": {
+                                    "description": "Number of active messages in the queue, topic, or subscription.",
+                                    "format": "int64",
+                                    "readOnly": true,
+                                    "type": "integer"
+                                },
+                                "deadLetterMessageCount": {
+                                    "description": "Number of messages that are dead lettered.",
+                                    "format": "int64",
+                                    "readOnly": true,
+                                    "type": "integer"
+                                },
+                                "scheduledMessageCount": {
+                                    "description": "Number of scheduled messages.",
+                                    "format": "int64",
+                                    "readOnly": true,
+                                    "type": "integer"
+                                },
+                                "transferDeadLetterMessageCount": {
+                                    "description": "Number of messages transferred into dead letters.",
+                                    "format": "int64",
+                                    "readOnly": true,
+                                    "type": "integer"
+                                },
+                                "transferMessageCount": {
+                                    "description": "Number of messages transferred to another queue, topic, or subscription.",
+                                    "format": "int64",
+                                    "readOnly": true,
+                                    "type": "integer"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "createdAt": {
+                            "description": "Exact time the message was created.",
+                            "format": "date-time",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "deadLetteringOnFilterEvaluationExceptions": {
+                            "description": "Value that indicates whether a subscription has dead letter support on filter evaluation exceptions.",
+                            "type": "boolean"
+                        },
+                        "deadLetteringOnMessageExpiration": {
+                            "description": "Value that indicates whether a subscription has dead letter support when a message expires.",
+                            "type": "boolean"
+                        },
+                        "defaultMessageTimeToLive": {
+                            "description": "ISO 8061 Default message timespan to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself.",
+                            "format": "duration",
+                            "type": "string"
+                        },
+                        "duplicateDetectionHistoryTimeWindow": {
+                            "description": "ISO 8601 timeSpan structure that defines the duration of the duplicate detection history. The default value is 10 minutes.",
+                            "format": "duration",
+                            "type": "string"
+                        },
+                        "enableBatchedOperations": {
+                            "description": "Value that indicates whether server-side batched operations are enabled.",
+                            "type": "boolean"
+                        },
+                        "forwardDeadLetteredMessagesTo": {
+                            "description": "Queue/Topic name to forward the Dead Letter message",
+                            "type": "string"
+                        },
+                        "forwardTo": {
+                            "description": "Queue/Topic name to forward the messages",
+                            "type": "string"
+                        },
+                        "lockDuration": {
+                            "description": "ISO 8061 lock duration timespan for the subscription. The default value is 1 minute.",
+                            "format": "duration",
+                            "type": "string"
+                        },
+                        "maxDeliveryCount": {
+                            "description": "Number of maximum deliveries.",
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "messageCount": {
+                            "description": "Number of messages.",
+                            "format": "int64",
+                            "readOnly": true,
+                            "type": "integer"
+                        },
+                        "requiresSession": {
+                            "description": "Value indicating if a subscription supports the concept of sessions.",
+                            "type": "boolean"
+                        },
+                        "status": {
+                            "description": "Enumerates the possible values for the status of a messaging entity.",
+                            "enum": [
+                                "Active",
+                                "Disabled",
+                                "Restoring",
+                                "SendDisabled",
+                                "ReceiveDisabled",
+                                "Creating",
+                                "Deleting",
+                                "Renaming",
+                                "Unknown"
+                            ],
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": false,
+                                "name": "EntityStatus"
+                            }
+                        },
+                        "updatedAt": {
+                            "description": "The exact time the message was updated.",
+                            "format": "date-time",
+                            "readOnly": true,
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

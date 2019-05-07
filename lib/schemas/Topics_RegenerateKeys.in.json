@@ -1,0 +1,61 @@
+{
+    "type": "object",
+    "properties": {
+        "resourceGroupName": {
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
+        },
+        "namespaceName": {
+            "required": true,
+            "type": "string",
+            "minLength": 6,
+            "maxLength": 50
+        },
+        "topicName": {
+            "required": true,
+            "type": "string",
+            "minLength": 1
+        },
+        "authorizationRuleName": {
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50
+        },
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "Parameters supplied to the Regenerate Authorization Rule operation, specifies which key needs to be reset.",
+            "properties": {
+                "key": {
+                    "description": "Optional, if the key value provided, is reset for KeyType value or autogenerate Key value set for keyType",
+                    "type": "string"
+                },
+                "keyType": {
+                    "description": "The access key to regenerate.",
+                    "enum": [
+                        "PrimaryKey",
+                        "SecondaryKey"
+                    ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "modelAsString": false,
+                        "name": "KeyType"
+                    }
+                }
+            },
+            "required": [
+                "keyType"
+            ],
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

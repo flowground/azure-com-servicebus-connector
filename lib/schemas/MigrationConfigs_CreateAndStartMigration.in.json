@@ -1,0 +1,96 @@
+{
+    "type": "object",
+    "properties": {
+        "resourceGroupName": {
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
+        },
+        "namespaceName": {
+            "required": true,
+            "type": "string",
+            "minLength": 6,
+            "maxLength": 50
+        },
+        "configName": {
+            "required": true,
+            "type": "string",
+            "enum": [
+                "$default"
+            ]
+        },
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "allOf": [
+                {
+                    "description": "The Resource definition for other than namespace.",
+                    "properties": {
+                        "id": {
+                            "description": "Resource Id",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "name": {
+                            "description": "Resource name",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "type": {
+                            "description": "Resource type",
+                            "readOnly": true,
+                            "type": "string"
+                        }
+                    },
+                    "x-ms-azure-resource": true,
+                    "type": "object"
+                }
+            ],
+            "description": "Single item in List or Get Migration Config operation",
+            "properties": {
+                "properties": {
+                    "description": "Properties required to the Create Migration Configuration",
+                    "properties": {
+                        "migrationState": {
+                            "description": "State in which Standard to Premium Migration is, possible values : Unknown, Reverting, Completing, Initiating, Syncing, Active",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "pendingReplicationOperationsCount": {
+                            "description": "Number of entities pending to be replicated.",
+                            "format": "int64",
+                            "readOnly": true,
+                            "type": "integer"
+                        },
+                        "postMigrationName": {
+                            "description": "Name to access Standard Namespace after migration",
+                            "type": "string"
+                        },
+                        "provisioningState": {
+                            "description": "Provisioning state of Migration Configuration ",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "targetNamespace": {
+                            "description": "Existing premium Namespace ARM Id name which has no entities, will be used for migration",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "targetNamespace",
+                        "postMigrationName"
+                    ],
+                    "x-ms-client-flatten": true
+                }
+            },
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

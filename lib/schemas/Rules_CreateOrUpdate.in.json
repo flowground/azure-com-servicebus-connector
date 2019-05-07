@@ -1,0 +1,182 @@
+{
+    "type": "object",
+    "properties": {
+        "resourceGroupName": {
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
+        },
+        "namespaceName": {
+            "required": true,
+            "type": "string",
+            "minLength": 6,
+            "maxLength": 50
+        },
+        "topicName": {
+            "required": true,
+            "type": "string",
+            "minLength": 1
+        },
+        "subscriptionName": {
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50
+        },
+        "ruleName": {
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50
+        },
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "allOf": [
+                {
+                    "description": "The Resource definition for other than namespace.",
+                    "properties": {
+                        "id": {
+                            "description": "Resource Id",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "name": {
+                            "description": "Resource name",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "type": {
+                            "description": "Resource type",
+                            "readOnly": true,
+                            "type": "string"
+                        }
+                    },
+                    "x-ms-azure-resource": true,
+                    "type": "object"
+                }
+            ],
+            "description": "Description of Rule Resource.",
+            "properties": {
+                "properties": {
+                    "description": "Properties of Rule resource",
+                    "x-ms-client-flatten": true,
+                    "properties": {
+                        "action": {
+                            "description": "Represents the filter actions which are allowed for the transformation of a message that have been matched by a filter expression.",
+                            "properties": {
+                                "compatibilityLevel": {
+                                    "description": "This property is reserved for future use. An integer value showing the compatibility level, currently hard-coded to 20.",
+                                    "format": "int32",
+                                    "type": "integer"
+                                },
+                                "requiresPreprocessing": {
+                                    "default": true,
+                                    "description": "Value that indicates whether the rule action requires preprocessing.",
+                                    "type": "boolean"
+                                },
+                                "sqlExpression": {
+                                    "description": "SQL expression. e.g. MyProperty='ABC'",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "correlationFilter": {
+                            "description": "Properties of correlationFilter",
+                            "properties": {
+                                "contentType": {
+                                    "description": "Content type of the message.",
+                                    "type": "string"
+                                },
+                                "correlationId": {
+                                    "description": "Identifier of the correlation.",
+                                    "type": "string"
+                                },
+                                "label": {
+                                    "description": "Application specific label.",
+                                    "type": "string"
+                                },
+                                "messageId": {
+                                    "description": "Identifier of the message.",
+                                    "type": "string"
+                                },
+                                "properties": {
+                                    "additionalProperties": {
+                                        "type": "string"
+                                    },
+                                    "description": "dictionary object for custom filters",
+                                    "type": "object"
+                                },
+                                "replyTo": {
+                                    "description": "Address of the queue to reply to.",
+                                    "type": "string"
+                                },
+                                "replyToSessionId": {
+                                    "description": "Session identifier to reply to.",
+                                    "type": "string"
+                                },
+                                "requiresPreprocessing": {
+                                    "default": true,
+                                    "description": "Value that indicates whether the rule action requires preprocessing.",
+                                    "type": "boolean"
+                                },
+                                "sessionId": {
+                                    "description": "Session identifier.",
+                                    "type": "string"
+                                },
+                                "to": {
+                                    "description": "Address to send to.",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "filterType": {
+                            "description": "Filter type that is evaluated against a BrokeredMessage.",
+                            "enum": [
+                                "SqlFilter",
+                                "CorrelationFilter"
+                            ],
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": false,
+                                "name": "FilterType"
+                            }
+                        },
+                        "sqlFilter": {
+                            "description": "Properties of sqlFilter",
+                            "properties": {
+                                "compatibilityLevel": {
+                                    "default": 20,
+                                    "description": "This property is reserved for future use. An integer value showing the compatibility level, currently hard-coded to 20.",
+                                    "format": "int32",
+                                    "readOnly": true,
+                                    "type": "integer"
+                                },
+                                "requiresPreprocessing": {
+                                    "default": true,
+                                    "description": "Value that indicates whether the rule action requires preprocessing.",
+                                    "type": "boolean"
+                                },
+                                "sqlExpression": {
+                                    "description": "The SQL expression. e.g. MyProperty='ABC'",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

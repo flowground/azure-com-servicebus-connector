@@ -1,0 +1,157 @@
+{
+    "type": "object",
+    "properties": {
+        "resourceGroupName": {
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
+        },
+        "namespaceName": {
+            "required": true,
+            "type": "string"
+        },
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "allOf": [
+                {
+                    "allOf": [
+                        {
+                            "description": "The Resource definition for other than namespace.",
+                            "properties": {
+                                "id": {
+                                    "description": "Resource Id",
+                                    "readOnly": true,
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "description": "Resource name",
+                                    "readOnly": true,
+                                    "type": "string"
+                                },
+                                "type": {
+                                    "description": "Resource type",
+                                    "readOnly": true,
+                                    "type": "string"
+                                }
+                            },
+                            "x-ms-azure-resource": true,
+                            "type": "object"
+                        }
+                    ],
+                    "description": "The Resource definition.",
+                    "properties": {
+                        "location": {
+                            "description": "The Geo-location where the resource lives",
+                            "type": "string",
+                            "x-ms-mutability": [
+                                "read",
+                                "create"
+                            ]
+                        },
+                        "tags": {
+                            "additionalProperties": {
+                                "type": "string"
+                            },
+                            "description": "Resource tags",
+                            "type": "object",
+                            "x-ms-mutability": [
+                                "read",
+                                "create",
+                                "update"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "location"
+                    ],
+                    "type": "object"
+                }
+            ],
+            "description": "Description of a namespace resource.",
+            "properties": {
+                "properties": {
+                    "description": "Properties of the namespace.",
+                    "x-ms-client-flatten": true,
+                    "properties": {
+                        "createdAt": {
+                            "description": "The time the namespace was created.",
+                            "format": "date-time",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "metricId": {
+                            "description": "Identifier for Azure Insights metrics",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "provisioningState": {
+                            "description": "Provisioning state of the namespace.",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "serviceBusEndpoint": {
+                            "description": "Endpoint you can use to perform Service Bus operations.",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "updatedAt": {
+                            "description": "The time the namespace was updated.",
+                            "format": "date-time",
+                            "readOnly": true,
+                            "type": "string"
+                        }
+                    }
+                },
+                "sku": {
+                    "description": "Properties of Sku",
+                    "properties": {
+                        "capacity": {
+                            "description": "The specified messaging units for the tier. For Premium tier, capacity are 1,2 and 4.",
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "name": {
+                            "description": "Name of this SKU.",
+                            "enum": [
+                                "Basic",
+                                "Standard",
+                                "Premium"
+                            ],
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": false,
+                                "name": "SkuName"
+                            }
+                        },
+                        "tier": {
+                            "description": "The billing tier of this particular SKU.",
+                            "enum": [
+                                "Basic",
+                                "Standard",
+                                "Premium"
+                            ],
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": false,
+                                "name": "SkuTier"
+                            }
+                        }
+                    },
+                    "required": [
+                        "name"
+                    ],
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}
